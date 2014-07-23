@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        #gameholder{
+            margin: 50px auto 0;
+            height: 500px;
+            width: 800px;
+background-color: white;
+        }
+        body{
+            background-color: black;
+        }
+        #player{
+
+
+            position: absolute;
+            z-index: 3;
+        }
+        .eye,.eye2 {
+
+            background-color:white;
+            border: 1px solid #000000;
+            width: 12px;
+            height: 12px;
+            position: absolute;
+            border-radius: 30px;
+            float:right;
+           z-index: -1;
+
+        }
+
+        .eye span,.eye2 span {
+
+            width: 6px;
+            height: 6px;
+            position: absolute;
+            top: 3px;
+            left: 0;
+            border-radius: 30px;
+            background: #1D0C05;
+            z-index: -1;
+        }
+
+    .eye{
+        top:102px;
+        left: 37px;
+    }
+  .eye2{
+      top:107px;
+      left: 57px;
+  }
+    </style>
+</head>
+<body>
+ <div id="gameholder"></div>
+<div id="player" style="left: 500px; top:100px;"><img src="nakof2.png" width="150" height="200"></div>
+<script src="eyes.js"></script>
+ <script src="eventhandler.js"></script>
+</body>
+</html>
