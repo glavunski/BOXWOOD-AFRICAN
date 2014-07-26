@@ -104,6 +104,7 @@ function moveEnemies(movement) {
             var newEnemyPosY = (enemyY + Math.sin(angleInDegrees) * movement);
             allEnemies[i].style.left = newEnemyPosX + 'px';
             allEnemies[i].style.top = newEnemyPosY + 'px';
+            //check collision
             if (true) {
 
             }
@@ -115,9 +116,9 @@ window.onload = function movement() {
     document.addEventListener('keyup', keyUp, false);
     function loop() {
         tick();
-
-        setTimeout(loop, tickRate);
         moveEnemies(5);
+        setTimeout(loop, tickRate);
+
 
     }
 

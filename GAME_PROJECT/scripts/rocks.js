@@ -66,6 +66,8 @@ function addEnemy() {
     newEnemy.style.left = (randomX) + 'px';
     newEnemy.style.top = (randomY) + 'px';
     newEnemy.setAttribute('class', 'enemy');
+    newEnemy.style.borderRadius = enemyWidht / 2 + 'px';
     document.body.appendChild(newEnemy);
-    console.log(randomQuadrant);
+    document.getElementById('enemiesCount').innerText = parseInt(document.getElementById('enemiesCount').innerText) + 1;
+    //console.log(randomQuadrant);
 }
