@@ -58,16 +58,12 @@ function addEnemy() {
         default: { randomX = 0; randomY = 0; }
     }
     var newEnemy = document.createElement('div');
-    newEnemy.style.backgroundImage = 'url("images/enemy1.png")';
     newEnemy.style.width = enemyWidht + 'px';
     newEnemy.style.height = enemyHeight + 'px';
-    newEnemy.style.display = 'inline-block';
-    newEnemy.style.position = 'absolute';
     newEnemy.style.left = (randomX) + 'px';
     newEnemy.style.top = (randomY) + 'px';
     newEnemy.setAttribute('class', 'enemy');
     newEnemy.style.borderRadius = enemyWidht / 2 + 'px';
     document.body.appendChild(newEnemy);
     document.getElementById('enemiesCount').innerText = parseInt(document.getElementById('enemiesCount').innerText) + 1;
-    //console.log(randomQuadrant);
 }

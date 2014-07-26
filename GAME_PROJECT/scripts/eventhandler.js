@@ -88,20 +88,34 @@ function getPlayerPosition() {
 }
 function moveEnemies(movement) {
     var allEnemies = document.getElementsByClassName('enemy');
+    var userPosReal = getPlayerPosition();
     for (var i in allEnemies) {
         if (allEnemies[i].nodeName === 'DIV') {
-            var userPos = getPlayerPosition();
+            var enemyRadius = parseInt(allEnemies[i].style.width.toString().substr(0, allEnemies[i].style.width.toString().length - 2)) / 2;
             if (allEnemies[i].style.left == '') {
                 allEnemies[i].style.left = parseInt(allEnemies[i].offsetLeft) + 'px';
                 allEnemies[i].style.top = parseInt(allEnemies[i].offsetTop) + 'px';
+                userPos[0] -= enemyRadius;
+                userPos[1] -= enemyRadius;
             }
-            var enemyX = parseInt(allEnemies[i].style.left.toString().substr(0, allEnemies[i].style.left.toString().length - 2))
-            var enemyY = parseInt(allEnemies[i].style.top.toString().substr(0, allEnemies[i].style.top.toString().length - 2))
+            var enemyX = parseFloat(allEnemies[i].style.left.toString().substr(0, allEnemies[i].style.left.toString().length - 2));
+            var enemyY = parseFloat(allEnemies[i].style.top.toString().substr(0, allEnemies[i].style.top.toString().length - 2));
+            var enemyCenterX = enemyX - enemyRadius;
+            var enemyCenterY = enemyY - enemyRadius;
+            var userPos = [userPosReal[0] - enemyRadius, userPosReal[1] - enemyRadius];
             var deltaX = userPos[0] - enemyX;
             var deltaY = userPos[1] - enemyY;
-            var angleInDegrees = Math.atan(deltaY / deltaX) * 180 / Math.PI;
-            var newEnemyPosX = (enemyX + Math.cos(angleInDegrees) * movement);
-            var newEnemyPosY = (enemyY + Math.sin(angleInDegrees) * movement);
+            var angleInDegrees = Math.atan(deltaY / deltaX);// * 180 / Math.PI;
+            if (Math.abs(userPos[0] - (enemyX + Math.cos(angleInDegrees) * movement)) < Math.abs(userPos[0] - (enemyX - Math.cos(angleInDegrees) * movement))) {
+                var newEnemyPosX = (enemyX + Math.cos(angleInDegrees) * movement);
+            } else {
+                var newEnemyPosX = (enemyX - Math.cos(angleInDegrees) * movement);
+            }
+            if (Math.abs(userPos[1] - (enemyY + Math.sin(angleInDegrees) * movement)) < Math.abs(userPos[1] - (enemyY - Math.sin(angleInDegrees) * movement))) {
+                var newEnemyPosY = (enemyY + Math.sin(angleInDegrees) * movement);
+            } else {
+                var newEnemyPosY = (enemyY - Math.sin(angleInDegrees) * movement);
+            }
             allEnemies[i].style.left = newEnemyPosX + 'px';
             allEnemies[i].style.top = newEnemyPosY + 'px';
             //check collision
@@ -116,9 +130,9 @@ window.onload = function movement() {
     document.addEventListener('keyup', keyUp, false);
     function loop() {
         tick();
-        moveEnemies(5);
-        setTimeout(loop, tickRate);
 
+        setTimeout(loop, tickRate);
+        moveEnemies(5);
 
     }
 
