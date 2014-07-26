@@ -46,8 +46,12 @@ body {
     top: 107px;
     left: 57px;
 }
-/*#enemy{
-        background-image:url("../images/enemy1.png");
-        width:50px;
-        height:50px;
-    }*/
+
+.enemy {
+    background-image: url("../images/enemy1.png");
+    width: 50px;
+    height: 50px;
+    position: absolute;
+    left:20px;
+    top:100px;
+}

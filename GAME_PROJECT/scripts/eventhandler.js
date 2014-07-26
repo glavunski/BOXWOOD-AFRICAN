@@ -10,12 +10,11 @@ var playerY = parseInt(player.style.top);
 var playerWidth = player.clientWidth;
 var playerHeight = player.clientHeight;
 
-var tickRate = 15,
+var tickRate = 10,
     keyArrowLeft = false,
     keyArrowRight = false,
     keyArrowUp = false,
     keyArrowDown = false;
-
 function keyDown(event) {
 
 
@@ -72,13 +71,53 @@ var tick = function () {
     document.getElementById('player').style.top = playerY.toString() + "px";
 
 };
+function getPlayerPosition() {
+    var player = document.getElementById('player');
+    var playerWidth = player.clientWidth;
+    var playerHeight = player.clientHeight;
+    var playerCornerX = parseInt(player.style.left.substr(0, player.style.left.length - 2));
+    var playerCornerY = parseInt(player.style.top.substr(0, player.style.top.length - 2));
+    //console.log(player);
+    var playerX = playerCornerX + playerWidth / 2;
+    var playerY = playerCornerY + playerHeight / 2;
+    var playerPos = [];
+    playerPos[0] = playerX;
+    playerPos[1] = playerY;
+    return playerPos;
+    //console.log('playerX:' + playerX + ' playerY:' + playerY);
+}
+function moveEnemies(movement) {
+    var allEnemies = document.getElementsByClassName('enemy');
+    for (var i in allEnemies) {
+        if (allEnemies[i].nodeName === 'DIV') {
+            var userPos = getPlayerPosition();
+            if (allEnemies[i].style.left == '') {
+                allEnemies[i].style.left = parseInt(allEnemies[i].offsetLeft) + 'px';
+                allEnemies[i].style.top = parseInt(allEnemies[i].offsetTop) + 'px';
+            }
+            var enemyX = parseInt(allEnemies[i].style.left.toString().substr(0, allEnemies[i].style.left.toString().length - 2))
+            var enemyY = parseInt(allEnemies[i].style.top.toString().substr(0, allEnemies[i].style.top.toString().length - 2))
+            var deltaX = userPos[0] - enemyX;
+            var deltaY = userPos[1] - enemyY;
+            var angleInDegrees = Math.atan(deltaY / deltaX) * 180 / Math.PI;
+            var newEnemyPosX = (enemyX + Math.cos(angleInDegrees) * movement);
+            var newEnemyPosY = (enemyY + Math.sin(angleInDegrees) * movement);
+            allEnemies[i].style.left = newEnemyPosX + 'px';
+            allEnemies[i].style.top = newEnemyPosY + 'px';
+            if (true) {
 
+            }
+        }
+    }
+}
 window.onload = function movement() {
     document.addEventListener('keydown', keyDown, false);
     document.addEventListener('keyup', keyUp, false);
     function loop() {
         tick();
+
         setTimeout(loop, tickRate);
+        moveEnemies(5);
 
     }
 

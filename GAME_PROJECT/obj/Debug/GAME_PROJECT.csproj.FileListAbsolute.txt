@@ -4,3 +4,9 @@ C:\Users\D.Valchanova\Desktop\GAME_PROJECT\GAME_PROJECT\bin\GAME_PROJECT.pdb
 C:\Users\D.Valchanova\Desktop\GAME_PROJECT\GAME_PROJECT\obj\Debug\GAME_PROJECT.csprojResolveAssemblyReference.cache
 C:\Users\D.Valchanova\Desktop\GAME_PROJECT\GAME_PROJECT\obj\Debug\GAME_PROJECT.dll
 C:\Users\D.Valchanova\Desktop\GAME_PROJECT\GAME_PROJECT\obj\Debug\GAME_PROJECT.pdb
+C:\Users\D.Valchanova\Desktop\d\trunk\GAME_PROJECT\bin\GAME_PROJECT.dll.config
+C:\Users\D.Valchanova\Desktop\d\trunk\GAME_PROJECT\bin\GAME_PROJECT.dll
+C:\Users\D.Valchanova\Desktop\d\trunk\GAME_PROJECT\bin\GAME_PROJECT.pdb
+C:\Users\D.Valchanova\Desktop\d\trunk\GAME_PROJECT\obj\Debug\GAME_PROJECT.csprojResolveAssemblyReference.cache
+C:\Users\D.Valchanova\Desktop\d\trunk\GAME_PROJECT\obj\Debug\GAME_PROJECT.dll
+C:\Users\D.Valchanova\Desktop\d\trunk\GAME_PROJECT\obj\Debug\GAME_PROJECT.pdb

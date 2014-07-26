@@ -4,22 +4,11 @@ var playGroundWidth = playGround.clientWidth;
 var playGroundHeight = playGround.clientHeight;
 var playGroundCornerX = playGround.offsetLeft;
 var playGroundCornerY = playGround.offsetTop;
-//var playGroundCornerX = parseInt(playGround.style.left.substr(0, playGround.style.left.length - 2));
-//var playGroundCornerY = parseInt(playGround.style.top.substr(0, playGround.style.top.length - 2));
 
-setInterval(getPlayerPosition, 250);
 
-function getPlayerPosition() {
-    var player = document.getElementById('player');
-    var playerWidth = player.clientWidth;
-    var playerHeight = player.clientHeight;
-    var playerCornerX = parseInt(player.style.left.substr(0, player.style.left.length - 2));
-    var playerCornerY = parseInt(player.style.top.substr(0, player.style.top.length - 2));
-    //console.log(player);
-    var playerX = playerCornerX + playerWidth / 2;
-    var playerY = playerCornerY + playerHeight / 2;
-    console.log('playerX:' + playerX + ' playerY:' + playerY);
+setInterval(addEnemy, 250);
 
+function addEnemy() {
     //enemy image Size:
     var enemyWidht = 50;
     var enemyHeight = 50;
@@ -52,7 +41,7 @@ function getPlayerPosition() {
             break;
         }
         case 5: {
-            randomX = Math.floor(Math.random() * (playGroundCornerX + 1 )) - enemyWidht;
+            randomX = Math.floor(Math.random() * (playGroundCornerX + 1)) - enemyWidht;
             randomY = Math.floor(Math.random() * (playGroundCornerY + 1 + enemyHeight)) + playGroundCornerY + playGroundHeight - enemyHeight;
             break;
         }
@@ -76,6 +65,7 @@ function getPlayerPosition() {
     newEnemy.style.position = 'absolute';
     newEnemy.style.left = (randomX) + 'px';
     newEnemy.style.top = (randomY) + 'px';
+    newEnemy.setAttribute('class', 'enemy');
     document.body.appendChild(newEnemy);
     console.log(randomQuadrant);
 }
