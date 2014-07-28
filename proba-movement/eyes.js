@@ -11,6 +11,7 @@ var createEye = function () {
 
     eye = document.createElement("div");
     eye.classList.add("eye");
+    eye.id = "eye1";
     lens = document.createElement("span");
     eye.appendChild(lens);
 
@@ -31,6 +32,7 @@ var createEye2 = function () {
 
     eye2 = document.createElement("div");
     eye2.classList.add("eye2");
+    eye2.id = "eye12";
     lens2 = document.createElement("span");
     eye2.appendChild(lens2);
     document.getElementById('player').appendChild(eye2);
@@ -52,6 +54,10 @@ document.addEventListener("mousemove", function (event) {
     var x = event.pageX;
     var y = event.pageY;
 
+
+
+
+
     eyes.forEach(function (eye) {
 
     var offsets = eye.lens.getBoundingClientRect();
@@ -59,7 +65,8 @@ document.addEventListener("mousemove", function (event) {
     var top = (offsets.top - y);
     var rad = Math.atan2(top, left);
 
-    eye.iris.style.webkitTransform = "rotate(" + rad + "rad)";
+
+        eye.iris.style.webkitTransform = "rotate(" + rad + "rad)";
         eye.iris.style.MozTransform = "rotate(" + rad + "rad)";
         eye.iris.style.msTransform = "rotate(" + rad + "rad)";
     });

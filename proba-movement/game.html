@@ -10,6 +10,12 @@
             width: 800px;
 background-color: white;
         }
+        #can{
+            margin-left:150px;
+            height: 500px;
+            width: 800px;
+            position: absolute;
+        }
         body{
             background-color: black;
         }
@@ -38,25 +44,33 @@ background-color: white;
             height: 5px;
             position: absolute;
             top: 2px;
-            left: 0;
+            left:0px;
             border-radius: 30px;
             background: #1D0C05;
             z-index: -1;
         }
-
+         #arr{
+             position: absolute;
+             top:-10px;
+             left: 20px;
+             z-index: -2;
+         }
     .eye{
-        top:43px;
+        top:16px;
         left: 50px;
     }
   .eye2{
-      top:62px;
+      top:36px;
       left:45px;
   }
     </style>
 </head>
 <body>
+<svg id="can"></svg>
  <div id="gameholder"></div>
-<div id="player" style="left: 500px; top:100px;-webkit-transform:rotate(0);"><img src="ball.png" width="70" height="95"></div>
+<div id="player" style="left: 500px; top:100px;-webkit-transform:rotate(0);"><img src="nakov.png" width="70" height="70">
+
+</div>
 <script src="eyes.js"></script>
  <script src="eventhandler.js"></script>
 </body>
