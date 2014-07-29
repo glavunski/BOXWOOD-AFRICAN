@@ -55,7 +55,9 @@ document.addEventListener("mousemove", function (event) {
     var y = event.pageY;
 
 
-
+	var init = document.getElementById('player').style.transform.indexOf('(');
+	var fin = document.getElementById('player').style.transform.indexOf(')');
+	var angle=parseFloat(document.getElementById('player').style.transform.substr(init+1,fin-init-1))*Math.PI/180 ;
 
 
     eyes.forEach(function (eye) {
@@ -66,9 +68,9 @@ document.addEventListener("mousemove", function (event) {
     var rad = Math.atan2(top, left);
 
 
-        eye.iris.style.webkitTransform = "rotate(" + rad + "rad)";
-        eye.iris.style.MozTransform = "rotate(" + rad + "rad)";
-        eye.iris.style.msTransform = "rotate(" + rad + "rad)";
+        eye.iris.style.webkitTransform = "rotate(" + (rad -angle)+ "rad)";
+        eye.iris.style.MozTransform = "rotate(" + (rad -angle) + "rad)";
+        eye.iris.style.msTransform = "rotate(" + (rad -angle) + "rad)";
     });
     eyes2.forEach(function (eye2) {
 
@@ -76,10 +78,11 @@ document.addEventListener("mousemove", function (event) {
     var left = (offsets.left - x);
     var top = (offsets.top - y);
     var rad = Math.atan2(top, left);
+	console.log(rad);
+    eye2.iris.style.webkitTransform = "rotate(" + (rad -angle) + "rad)";
+        eye2.iris.style.MozTransform = "rotate(" + (rad -angle) + "rad)";
+        eye2.iris.style.msTransform = "rotate(" + (rad -angle) + "rad)";
 
-    eye2.iris.style.webkitTransform = "rotate(" + rad + "rad)";
-        eye2.iris.style.MozTransform = "rotate(" + rad + "rad)";
-        eye2.iris.style.msTransform = "rotate(" + rad + "rad)";
     });
 
  });
