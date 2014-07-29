@@ -4,11 +4,19 @@ var playGroundTop = parseInt(playGround.offsetTop);
 var playGroundWidth = parseInt(playGround.clientWidth);
 var playGroundHeight = parseInt(playGround.clientHeight);
 
+
 var player = document.getElementById('player');
-var playerX = parseInt(player.style.left);
-var playerY = parseInt(player.style.top);
 var playerWidth = player.clientWidth;
 var playerHeight = player.clientHeight;
+player.style.left = (playGroundLeft - playerWidth / 2 + playGroundWidth / 2) + 'px';
+player.style.top = (playGroundTop - playerHeight / 2 + playGroundHeight / 2) + 'px';
+var playerX = parseInt(player.style.left);
+var playerY = parseInt(player.style.top);
+
+var lives = 999;
+
+
+
 
 var tickRate = 10,
     keyArrowLeft = false,
@@ -71,6 +79,7 @@ var tick = function () {
     document.getElementById('player').style.top = playerY.toString() + "px";
 
 };
+
 function getPlayerPosition() {
     var player = document.getElementById('player');
     var playerWidth = player.clientWidth;
@@ -86,6 +95,7 @@ function getPlayerPosition() {
     return playerPos;
     //console.log('playerX:' + playerX + ' playerY:' + playerY);
 }
+
 function moveEnemies(movement) {
     var allEnemies = document.getElementsByClassName('enemy');
     var userPosReal = getPlayerPosition();
@@ -119,8 +129,12 @@ function moveEnemies(movement) {
             allEnemies[i].style.left = newEnemyPosX + 'px';
             allEnemies[i].style.top = newEnemyPosY + 'px';
             //check collision
-            if (true) {
-
+            var distanceBetweenPlayer = Math.sqrt(Math.pow(newEnemyPosX - userPos[0], 2) + Math.pow(newEnemyPosY - userPos[1], 2));
+            if (distanceBetweenPlayer < playerHeight / 2 + enemyRadius) {
+                lives--;
+                //allEnemies[i].removeEventListener;
+                document.body.removeChild(allEnemies[i]);
+                document.getElementById('lives').innerText = parseInt(document.getElementById('lives').innerText) - 1;
             }
         }
     }

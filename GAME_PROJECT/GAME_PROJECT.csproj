@@ -60,6 +60,7 @@
     <Content Include="game.html" />
     <Content Include="images\enemy1.png" />
     <Content Include="images\nakof2.png" />
+    <Content Include="images\nakov.png" />
     <Content Include="scripts\eventhandler.js" />
     <Content Include="scripts\eyes.js" />
     <Content Include="scripts\rocks.js" />

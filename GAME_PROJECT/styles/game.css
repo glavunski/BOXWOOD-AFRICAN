@@ -6,14 +6,24 @@
     background-color: white;
 }
 
-body {
-    background-color: black;
-}
-
 #player {
+    background-image: url("../images/nakov.png");
+    background-size: 100%;
+    width: 70px;
+    height: 70px;
     position: absolute;
     z-index: 3;
-    border:1px solid green;
+    border: 1px solid red;
+    border-radius: 50px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: #ECEEEF;
+    /*left:450px;
+    top:300px;*/
+}
+
+body {
+    background-color: black;
 }
 
 .eye, .eye2 {
@@ -39,13 +49,13 @@ body {
     }
 
 .eye {
-    top: 102px;
-    left: 37px;
+    top: 15px;
+    left: 47px;
 }
 
 .eye2 {
-    top: 107px;
-    left: 57px;
+    top: 36px;
+    left: 45px;
 }
 
 .enemy {
@@ -55,9 +65,8 @@ body {
     position: absolute;
     left: 20px;
     top: 100px;
-    border:1px solid red;
-    /*border-radius:25px;*/
-    z-index:100;
+    border: 1px solid red;
+    z-index: 100;
 }
 
 table {
