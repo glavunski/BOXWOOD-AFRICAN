@@ -50,6 +50,7 @@ function keyDown(event) {
 
 }
 
+
 function keyUp(event){
 
     if (event.keyCode === 39) {
@@ -132,7 +133,11 @@ function createLasers(event){
 
 function checkLazerCollision(laser){
 
-    var en =  document.getElementsByClassName('enemy');
+	var allEnemies1 = document.getElementsByClassName('enemy');
+	var allEnemies2 = document.getElementsByClassName('enemy2');
+	//merge two node lists
+	var en = mergeNodes( allEnemies1, allEnemies2 );
+    //var en =  document.getElementsByClassName('enemy');
 
 
         var cord =laser.getBoundingClientRect();
@@ -246,10 +251,12 @@ function getPlayerPosition() {
     //console.log('playerX:' + playerX + ' playerY:' + playerY);
 }
 
+var mergeNodes = function(a, b) {
+	return [].slice.call(a).concat([].slice.call(b));
+};
+
 function moveEnemies(movement) {
-	var mergeNodes = function(a, b) {
-		return [].slice.call(a).concat([].slice.call(b));
-	};
+
     var allEnemies1 = document.getElementsByClassName('enemy');
 	var allEnemies2 = document.getElementsByClassName('enemy2');
 	//merge two node lists
