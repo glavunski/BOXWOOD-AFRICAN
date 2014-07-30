@@ -14,6 +14,18 @@
 
         body{
             background-color: black;
+
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            -khtml-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+
+        }
+        .stop-scrolling {
+            height: 100%;
+            overflow: hidden;
         }
         #player{
 
@@ -88,11 +100,11 @@
         }
     </style>
 </head>
-<body>
+<body class="stop-scrolling">
 
  <div id="gameholder"></div>
-<div id="player" style="left: 500px; top:100px;-webkit-transform:rotate(0);"><img src="nakov.png" width="70" height="70">
-<div id="arr"><img src="arrow.png" height="20" width="35"></div>
+<div id="player" style="left: 500px; top:100px;-webkit-transform:rotate(0);"><img id="nakof" src="nakov.png" width="70" height="70">
+<div id="arr"><img id="arrow" src="arrow.png" height="20" width="35"></div>
 </div>
  <table>
      <tr>

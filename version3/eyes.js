@@ -1,8 +1,3 @@
-/**
- * Created by GLAVUN on 18.6.2014 г..
- */
-
-
 var createEye = function () {
     var eyes = [];
     var eye;
@@ -17,13 +12,13 @@ var createEye = function () {
 
     document.getElementById('player').appendChild(eye);
     eyes.push({
-    iris: eye,
-    lens: lens
+        iris: eye,
+        lens: lens
     });
 
     return eyes;
 
-    };
+};
 var createEye2 = function () {
     var eyes2 = [];
     var eye2;
@@ -37,13 +32,13 @@ var createEye2 = function () {
     eye2.appendChild(lens2);
     document.getElementById('player').appendChild(eye2);
     eyes2.push({
-    iris: eye2,
-    lens: lens2
+        iris: eye2,
+        lens: lens2
     });
 
     return eyes2;
 
-    };
+};
 
 var eyes = createEye();
 var eyes2 = createEye2();
@@ -55,17 +50,17 @@ document.addEventListener("mousemove", function (event) {
     var y = event.pageY;
 
 
-	var init = document.getElementById('player').style.transform.indexOf('(');
-	var fin = document.getElementById('player').style.transform.indexOf(')');
-	var angle=parseFloat(document.getElementById('player').style.transform.substr(init+1,fin-init-1))*Math.PI/180 ;
+    var init = document.getElementById('player').style.transform.indexOf('(');
+    var fin = document.getElementById('player').style.transform.indexOf(')');
+    var angle=parseFloat(document.getElementById('player').style.transform.substr(init+1,fin-init-1))*Math.PI/180 ;
 
 
     eyes.forEach(function (eye) {
 
-    var offsets = eye.lens.getBoundingClientRect();
-    var left = (offsets.left - x);
-    var top = (offsets.top - y);
-    var rad = Math.atan2(top, left);
+        var offsets = eye.lens.getBoundingClientRect();
+        var left = (offsets.left - x);
+        var top = (offsets.top - y);
+        var rad = Math.atan2(top, left);
 
 
         eye.iris.style.webkitTransform = "rotate(" + (rad -angle)+ "rad)";
@@ -74,18 +69,15 @@ document.addEventListener("mousemove", function (event) {
     });
     eyes2.forEach(function (eye2) {
 
-    var offsets = eye2.lens.getBoundingClientRect();
-    var left = (offsets.left - x);
-    var top = (offsets.top - y);
-    var rad = Math.atan2(top, left);
-	console.log(rad);
-    eye2.iris.style.webkitTransform = "rotate(" + (rad -angle) + "rad)";
+        var offsets = eye2.lens.getBoundingClientRect();
+        var left = (offsets.left - x);
+        var top = (offsets.top - y);
+        var rad = Math.atan2(top, left);
+        console.log(rad);
+        eye2.iris.style.webkitTransform = "rotate(" + (rad -angle) + "rad)";
         eye2.iris.style.MozTransform = "rotate(" + (rad -angle) + "rad)";
         eye2.iris.style.msTransform = "rotate(" + (rad -angle) + "rad)";
 
     });
 
- });
-
-
-
+});

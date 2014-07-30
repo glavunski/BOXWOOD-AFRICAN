@@ -30,6 +30,10 @@ var tickRate = 15,
 
 var offsets1;
 var offsets2;
+
+
+
+
 function keyDown(event) {
 
 
@@ -117,7 +121,6 @@ function createLasers(event){
 
 
 
-
     lazor2.style.left =offsets2.left+5 + "px";
     lazor2.style.top  =offsets2.top+6 + "px";
     lazor2.style.transform = "rotate(" + rad2 + "rad)";
@@ -125,27 +128,43 @@ function createLasers(event){
         las=true;
 
 
-
-
-
 }
 
-function checkLazerCollision(){
-    var ls =  document.getElementsByClassName('lazers');
+function checkLazerCollision(laser){
+
+    var en =  document.getElementsByClassName('enemy');
 
 
-    for(var i=0; i<ls.length; i++) {
-        var cord =ls[i].getBoundingClientRect();
+        var cord =laser.getBoundingClientRect();
 
-        if(cord.left>playGround.clientWidth+playGround.offsetLeft||
-            cord.left<playGround.offsetLeft||
-            cord.top>playGroundHeight+playGround.offsetTop||
-            cord.top<playGround.offsetTop){
-            ls[i].parentNode.removeChild(ls[i]);
+
+        if((cord.left>playGroundWidth+playGroundLeft)||
+            (cord.left<playGroundLeft)||
+            (cord.top>playGroundHeight+playGroundTop)||
+            (cord.top<playGroundTop)){
+            laser.parentNode.removeChild(laser);
+        }
+
+        for(var a=0;a<en.length;a++){
+            var cordEn =en[a].getBoundingClientRect();
+            var radleft = cordEn.left + 25;
+            var radtop = cordEn.top + 25;
+            var init = laser.style.transform.indexOf('(');
+            var fin =   laser.style.transform.indexOf(')');
+            var angle= parseFloat(laser.style.transform.substr(init+1,fin-init-1));
+
+
+          var dist = Math.sqrt(Math.pow(radleft - cord.left,2) + Math.pow(radtop - cord.top,2));
+  if(dist<=25){
+      laser.parentNode.removeChild(laser);
+      en[a].parentNode.removeChild(en[a]);
+  }
+
         }
 
 
-    }
+
+
 
 }
 
@@ -176,13 +195,15 @@ else if (keyArrowRight) {  playerR+=10;}
 
 if(las==true){
     var ls =     document.getElementsByClassName('lazers');
-    var init = ls[0].style.transform.indexOf('(');
-    var fin =  ls[0].style.transform.indexOf(')');
+
        for(var a=0;a<ls.length;a++) {
+           var init = ls[a].style.transform.indexOf('(');
+           var fin =  ls[a].style.transform.indexOf(')');
+           var rad1= parseFloat(ls[a].style.transform.substr(init+1,fin-init-1));
            var len1 = parseInt(ls[a].style.width);
            var top1= parseInt(ls[a].style.top);
            var left1= parseInt(ls[a].style.left);
-           var rad1= parseFloat(ls[a].style.transform.substr(init+1,fin-init-1));
+
 
 
            top1+= -Math.sin(rad1)*15;
@@ -196,7 +217,7 @@ if(las==true){
            ls[a].style.left = left1.toString() + "px";
            ls[a].style.top = top1.toString() + "px";
            ls[a].style.width = len1.toString() + "px";
-
+           checkLazerCollision(ls[a]);
        }
 
    }
@@ -273,6 +294,8 @@ function moveEnemies(movement) {
 
 
 window.onload =function movement(){
+    document.getElementById('nakof').ondragstart = function() { return false; };
+    document.getElementById('arrow').ondragstart = function() { return false; };
     document.addEventListener('keydown', keyDown, false);
     document.addEventListener('keyup', keyUp, false);
     document.addEventListener('mousedown', createLasers, false);
