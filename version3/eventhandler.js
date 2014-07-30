@@ -196,16 +196,24 @@ var tick = function() {
 else if (keyArrowRight) {  playerR+=10;}
 
      if(keyArrowUp){
-       playerX +=Math.cos(playerR*(Math.PI/180))*5;
-         playerY +=Math.sin(playerR*(Math.PI/180))*5;
+	     var nextPosX = playerX + Math.cos(playerR*(Math.PI/180))*5;
+		 var nextPosY = playerY + Math.sin(playerR*(Math.PI/180))*5;
+		if ( (nextPosX > playGroundLeft && nextPosX < playGroundLeft + playGroundWidth - playerWidth  && nextPosY > playGroundTop && nextPosY < playGroundTop + playGroundHeight - playerHeight)) {//if (playerX > 150)
+            playerX = nextPosX;
+			playerY = nextPosY;
+        }
+
 
     }else if(keyArrowDown){
-         playerX -=Math.cos(playerR*(Math.PI/180))*5;
-         playerY -=Math.sin(playerR*(Math.PI/180))*5;
+		var nextPosX = playerX - Math.cos(playerR*(Math.PI/180))*5;
+		var nextPosY = playerY - Math.sin(playerR*(Math.PI/180))*5;
+		if ( true) {//if (playerX > 150)
+			playerX = nextPosX;
+			playerY = nextPosY;
+        }
     }
 
-
-
+	
 
 
 

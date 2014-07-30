@@ -7,7 +7,7 @@ var playGroundCornerY = playGround.offsetTop;
 
 var  randomX;
 var  randomY;
-setInterval(addEnemy, 250);
+setInterval(addEnemy, 1000);
 
 function addEnemy() {
 	//select random enemy type
