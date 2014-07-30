@@ -13,7 +13,8 @@ player.style.left = (playGroundLeft - playerWidth / 2 + playGroundWidth / 2) + '
 player.style.top = (playGroundTop - playerHeight / 2 + playGroundHeight / 2) + 'px';
 var playerX = parseInt(player.style.left);
 var playerY = parseInt(player.style.top);
-var lives = 999;
+var lives = 3;
+var health=100;
 
 var las=false;
 
@@ -41,13 +42,17 @@ function keyDown(event) {
 
     if (event.keyCode === 39) {
         keyArrowRight = true;
+        event.preventDefault();
     } else if (event.keyCode === 37) {
         keyArrowLeft = true;
+        event.preventDefault();
     }
     if (event.keyCode === 38) {
         keyArrowUp = true;
+        event.preventDefault();
     } else if (event.keyCode === 40) {
         keyArrowDown= true;
+        event.preventDefault();
     }
 
 }
@@ -168,6 +173,7 @@ function checkLazerCollision(laser){
 
 
           var dist = Math.sqrt(Math.pow(radleft - cord.left,2) + Math.pow(radtop - cord.top,2));
+
   if(dist<=25){
       try{
       laser.parentNode.removeChild(laser);
@@ -180,8 +186,9 @@ function checkLazerCollision(laser){
 
         }
 
+}
 
-
+function gameOver(){
 
 
 }
@@ -191,30 +198,26 @@ var tick = function() {
 
 
 
-
     if (keyArrowLeft) { playerR-=10;}
-else if (keyArrowRight) {  playerR+=10;}
+    else if (keyArrowRight) {  playerR+=10;}
 
-     if(keyArrowUp){
-	     var nextPosX = playerX + Math.cos(playerR*(Math.PI/180))*5;
-		 var nextPosY = playerY + Math.sin(playerR*(Math.PI/180))*5;
-		if ( (nextPosX > playGroundLeft && nextPosX < playGroundLeft + playGroundWidth - playerWidth  && nextPosY > playGroundTop && nextPosY < playGroundTop + playGroundHeight - playerHeight)) {//if (playerX > 150)
+    if(keyArrowUp){
+        var nextPosX = playerX + Math.cos(playerR*(Math.PI/180))*5;
+        var nextPosY = playerY + Math.sin(playerR*(Math.PI/180))*5;
+        if ( (nextPosX > playGroundLeft && nextPosX < playGroundLeft + playGroundWidth - playerWidth  && nextPosY > playGroundTop && nextPosY < playGroundTop + playGroundHeight - playerHeight)) {//if (playerX > 150)
             playerX = nextPosX;
-			playerY = nextPosY;
+            playerY = nextPosY;
         }
 
 
     }else if(keyArrowDown){
-		var nextPosX = playerX - Math.cos(playerR*(Math.PI/180))*5;
-		var nextPosY = playerY - Math.sin(playerR*(Math.PI/180))*5;
-		if ( true) {//if (playerX > 150)
-			playerX = nextPosX;
-			playerY = nextPosY;
+        var nextPosX = playerX - Math.cos(playerR*(Math.PI/180))*5;
+        var nextPosY = playerY - Math.sin(playerR*(Math.PI/180))*5;
+        if ( (nextPosX > playGroundLeft && nextPosX < playGroundLeft + playGroundWidth - playerWidth  && nextPosY > playGroundTop && nextPosY < playGroundTop + playGroundHeight - playerHeight)) {//if (playerX > 150)
+            playerX = nextPosX;
+            playerY = nextPosY;
         }
     }
-
-	
-
 
 
 
@@ -247,6 +250,17 @@ if(las==true){
        }
 
    }
+    if(lives==2){
+        document.getElementById('live3').style.display = "none";
+    }else if(lives==1){
+        document.getElementById('live2').style.display = "none";
+    }else if(lives==0){
+        document.getElementById('live1').style.display = "none";
+
+    }
+
+
+    document.getElementById('healthbar').style.width = health*2 + "px";
     document.getElementById('player').style.left=playerX.toString() + "px";
     document.getElementById('player').style.top=playerY.toString() + "px";
     document.getElementById('player').style.transform = "rotate(" + playerR + "deg)";
@@ -316,11 +330,26 @@ function moveEnemies(movement) {
             //check collision
             var distanceBetweenPlayer = Math.sqrt(Math.pow(newEnemyPosX - userPos[0], 2) + Math.pow(newEnemyPosY - userPos[1], 2));
             if (distanceBetweenPlayer < playerHeight / 2 + enemyRadius) {
-                lives--;
+                if(parseInt(allEnemies[i].style.width)==50){
+                health=health-6;
+                }
+                if(parseInt(allEnemies[i].style.width)==40){
+                    health=health-4;
+                }
+                if(parseInt(allEnemies[i].style.width)==35){
+                    health=health-2;
+                }
+                if(health<=0){
+                    lives=lives-1;
+                    if(lives==0){
+                        gameOver();
+                    }else{
+                        health=100;
+                    }
+                }
                 //allEnemies[i].removeEventListener;
                 document.body.removeChild(allEnemies[i]);
-                document.getElementById('lives').innerText = parseInt(document.getElementById('lives').innerText) - 1;
-                document.getElementById('enemiesCount').innerText = parseInt(document.getElementById('enemiesCount').innerText) - 1;
+
             }
         }
     }
@@ -329,7 +358,16 @@ function moveEnemies(movement) {
 
 
 window.onload =function movement(){
-
+  lives = 3;
+   health=100;
+    document.getElementById('live3').style.display = "block";
+    document.getElementById('live2').style.display = "block";
+    document.getElementById('live1').style.display = "block";
+    document.getElementById('arrow').ondragstart = function() { return false; };
+    document.getElementById('player').ondragstart = function() { return false; };
+    document.getElementById('live1').ondragstart = function() { return false; };
+    document.getElementById('live2').ondragstart = function() { return false; };
+    document.getElementById('live3').ondragstart = function() { return false; };
     document.addEventListener('keydown', keyDown, false);
     document.addEventListener('keyup', keyUp, false);
     document.addEventListener('mousedown', createLasers, false);
@@ -337,7 +375,7 @@ window.onload =function movement(){
         tick();
 
         setTimeout(loop, tickRate);
-        moveEnemies(1);
+        moveEnemies(2);
 
     }
 

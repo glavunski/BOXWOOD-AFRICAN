@@ -7,7 +7,7 @@ var playGroundCornerY = playGround.offsetTop;
 
 var  randomX;
 var  randomY;
-setInterval(addEnemy, 1000);
+setInterval(addEnemy, 500);
 
 function addEnemy() {
 	//select random enemy type
@@ -93,5 +93,5 @@ function addEnemy() {
     newEnemy.style.top = (randomY) + 'px';
     newEnemy.style.borderRadius = enemyWidht / 2 + 'px';
     document.body.appendChild(newEnemy);
-    document.getElementById('enemiesCount').innerText = parseInt(document.getElementById('enemiesCount').innerText) + 1;
+
 }

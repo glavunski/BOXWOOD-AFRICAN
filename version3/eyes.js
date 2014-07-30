@@ -76,7 +76,7 @@ document.addEventListener("mousemove", function (event) {
 
         eye2.iris.style.webkitTransform = "rotate(" + (rad -angle) + "rad)";
         eye2.iris.style.MozTransform = "rotate(" + (rad -angle) + "rad)";
-        eye2.iris.style.msTransform = "rotate(" + (rad -angle) + "rad)";
+        eye2.iris.style.transform = "rotate(" + (rad -angle) + "rad)";
 
     });
 

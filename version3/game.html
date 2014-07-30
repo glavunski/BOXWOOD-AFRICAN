@@ -5,13 +5,38 @@
     <title></title>
     <style>
         #gameholder {
-            display: block;
-            margin: auto;
+
+            display: inline-block;
+         margin-left: 200px;
+            margin-top: 50px;
             height: 500px;
-            width: 70%;
+            width: 950px;
             background-image:url(texture.jpg);
         }
-
+       #side,#side2,#side3,#side4{
+           position: absolute;
+background-color: #000000;
+           display: inline-block;
+left:-5px;
+margin-top: 50px;
+           height: 100%;
+           width: 212px;;
+           z-index: 250;
+       }
+        #side2{
+            left:1165px;
+        }
+#side3{
+    height: 58px;
+    top:0;
+    width: 100%;
+    margin: 0;
+}
+        #side4{
+            height: 100px;
+            margin-top: 550px;
+            width: 100%;
+        }
         body{
             background-color: black;
 
@@ -94,43 +119,58 @@
             width: 40px;
             height: 40px;
         }
-        table {
-            margin: 0 0;
-            margin-left: 300px;
-            display: inline-block;
-            background: red;
-            color: yellow;
-            text-align: center;
-        }
 
-        table td {
-            width: 250px;
-        }
+#healthcon{
+    position: absolute;
+    z-index: 800;
+left: 215px;
+    top:17px;
+    width: 200px;
+    height: 20px;
+    border: 2px solid red;
+}
+       #healthbar{
+           width: 200px;
+           height: 20px;
+           background-color:green;
 
-        #enemiesCount {
+       }
+#live1,#live2,#live3{
+    position: absolute;
+    z-index: 800;
+    left: 435px;
+    top:12px;
+    transform:rotate(-100deg);
+
+}
+        #live2{
+            position: absolute;
+            z-index: 800;
+            left: 475px;
+        }
+       #live3{
+            position: absolute;
+            z-index: 800;
+            left: 515px;
         }
     </style>
 </head>
 <body class="stop-scrolling">
-
+<div id="side3"></div>
+<div id="side"></div>
+<div id="healthcon">
+    <div id="healthbar"></div>
+</div>
+<div id="live1"><img id="1" src="nakov.png" width="30" height="30"></div>
+<div id="live2"><img id="2" src="nakov.png" width="30" height="30"></div>
+<div id="live3"><img id="3" src="nakov.png" width="30" height="30"></div>
  <div id="gameholder"></div>
+<div id="side2"></div>
+<div id="side4"></div>
 <div id="player" style="left: 500px; top:100px;transform:rotate(0);"><img id="nakof" src="nakov.png" width="70" height="70">
 <div id="arr"><img id="arrow" src="arrow.png" height="20" width="35"></div>
 </div>
- <table>
-     <tr>
-         <td>Enemies on the field: </td>
-         <td id="enemiesCount">0</td>
-     </tr>
-     <tr>
-         <td>Enemies killed: </td>
-         <td id="enemiesKilled">0</td>
-     </tr>
-     <tr>
-         <td>Lives: </td>
-         <td id="lives">999</td>
-     </tr>
- </table>
+
 
 
  <script src="eventhandler.js" type="text/javascript"></script>
