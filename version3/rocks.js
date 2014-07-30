@@ -9,9 +9,29 @@ var playGroundCornerY = playGround.offsetTop;
 setInterval(addEnemy, 250);
 
 function addEnemy() {
-    //enemy image Size:
-    var enemyWidht = 50;
-    var enemyHeight = 50;
+	//select random enemy type
+	var rndEnemyType = Math.floor(Math.random() * 2) + 0;
+	    
+	var newEnemy = document.createElement('div');
+	var enemyWidht = 35;
+	var enemyHeight = 35;
+	switch (rndEnemyType){
+		case 0: {
+		    //enemy image Size:
+			enemyWidht = 50;
+			enemyHeight = 50;
+			newEnemy.setAttribute('class', 'enemy');
+			break;
+		}
+		case 1: {
+		    //enemy image Size:
+			enemyWidht = 35;
+			enemyHeight = 35;
+			newEnemy.setAttribute('class', 'enemy2');
+			break;
+		}
+	}
+
 
     var randomQuadrant = Math.floor(Math.random() * 8) + 0;
     switch (randomQuadrant) {
@@ -57,12 +77,12 @@ function addEnemy() {
         }
         default: { randomX = 0; randomY = 0; }
     }
-    var newEnemy = document.createElement('div');
+    //var newEnemy = document.createElement('div');
+	//newEnemy.setAttribute('class', 'enemy');
     newEnemy.style.width = enemyWidht + 'px';
     newEnemy.style.height = enemyHeight + 'px';
     newEnemy.style.left = (randomX) + 'px';
     newEnemy.style.top = (randomY) + 'px';
-    newEnemy.setAttribute('class', 'enemy');
     newEnemy.style.borderRadius = enemyWidht / 2 + 'px';
     document.body.appendChild(newEnemy);
     document.getElementById('enemiesCount').innerText = parseInt(document.getElementById('enemiesCount').innerText) + 1;
