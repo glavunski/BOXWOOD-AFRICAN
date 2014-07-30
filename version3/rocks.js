@@ -5,12 +5,13 @@ var playGroundHeight = playGround.clientHeight;
 var playGroundCornerX = playGround.offsetLeft;
 var playGroundCornerY = playGround.offsetTop;
 
-
+var  randomX;
+var  randomY;
 setInterval(addEnemy, 250);
 
 function addEnemy() {
 	//select random enemy type
-	var rndEnemyType = Math.floor(Math.random() * 2) + 0;
+	var rndEnemyType = Math.floor(Math.random() * 3) + 0;
 	    
 	var newEnemy = document.createElement('div');
 	var enemyWidht = 35;
@@ -30,6 +31,13 @@ function addEnemy() {
 			newEnemy.setAttribute('class', 'enemy2');
 			break;
 		}
+        case 2: {
+            //enemy image Size:
+            enemyWidht = 40;
+            enemyHeight = 40;
+            newEnemy.setAttribute('class', 'enemy3');
+            break;
+        }
 	}
 
 

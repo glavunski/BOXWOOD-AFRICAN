@@ -73,7 +73,7 @@ document.addEventListener("mousemove", function (event) {
         var left = (offsets.left - x);
         var top = (offsets.top - y);
         var rad = Math.atan2(top, left);
-        console.log(rad);
+
         eye2.iris.style.webkitTransform = "rotate(" + (rad -angle) + "rad)";
         eye2.iris.style.MozTransform = "rotate(" + (rad -angle) + "rad)";
         eye2.iris.style.msTransform = "rotate(" + (rad -angle) + "rad)";

@@ -18,10 +18,10 @@ var lives = 999;
 var las=false;
 
 
-var init = document.getElementById('player').style.webkitTransform.indexOf('(');
-var fin = document.getElementById('player').style.webkitTransform.indexOf(')');
+var init = document.getElementById('player').style.transform.indexOf('(');
+var fin = document.getElementById('player').style.transform.indexOf(')');
 
-var playerR=parseInt(document.getElementById('player').style.webkitTransform.substr(init+1,fin-init-1));
+var playerR=parseInt(document.getElementById('player').style.transform.substr(init+1,fin-init-1));
 var tickRate = 15,
     keyArrowLeft  = false,
     keyArrowRight = false,
@@ -30,6 +30,8 @@ var tickRate = 15,
 
 var offsets1;
 var offsets2;
+var newEnemyPosX;
+var newEnemyPosY;
 
 
 
@@ -107,6 +109,7 @@ function createLasers(event){
     lazor.style.TransformOrigin = "50% 100%";
     lazor.style.transform = "rotate(" + rad1 + "rad)";
 
+
     lazor2.style.position="absolute";
     lazor2.style.height=5 + "px";
     lazor2.style.width =5 + "px";
@@ -115,7 +118,7 @@ function createLasers(event){
     lazor2.style.boxShadow ="inset 0 10px 1px white, 0 0 7px red";
     lazor2.style.backgroundColor = "red";
     lazor2.style.TransformOrigin = "50% 100%";
-    lazor2.style.transform = "rotate(" + rad1 + "rad)";
+    lazor2.style.transform = "rotate(" + rad2 + "rad)";
 
     lazor.style.left =offsets1.left+5 + "px";
     lazor.style.top  =offsets1.top+6 + "px";
@@ -135,8 +138,10 @@ function checkLazerCollision(laser){
 
 	var allEnemies1 = document.getElementsByClassName('enemy');
 	var allEnemies2 = document.getElementsByClassName('enemy2');
+    var allEnemies3 = document.getElementsByClassName('enemy3');
 	//merge two node lists
-	var en = mergeNodes( allEnemies1, allEnemies2 );
+    var firsten = mergeNodes( allEnemies1, allEnemies2 );
+	var en =  mergeNodes( firsten, allEnemies3 );
     //var en =  document.getElementsByClassName('enemy');
 
 
@@ -159,11 +164,19 @@ function checkLazerCollision(laser){
             var angle= parseFloat(laser.style.transform.substr(init+1,fin-init-1));
 
 
+
+
+
           var dist = Math.sqrt(Math.pow(radleft - cord.left,2) + Math.pow(radtop - cord.top,2));
   if(dist<=25){
+      try{
       laser.parentNode.removeChild(laser);
       en[a].parentNode.removeChild(en[a]);
+      }catch (err){
+          console.log("error");
+      }
   }
+
 
         }
 
@@ -231,7 +244,6 @@ if(las==true){
     document.getElementById('player').style.transform = "rotate(" + playerR + "deg)";
 
 
-
 };
 
 
@@ -259,8 +271,10 @@ function moveEnemies(movement) {
 
     var allEnemies1 = document.getElementsByClassName('enemy');
 	var allEnemies2 = document.getElementsByClassName('enemy2');
+    var allEnemies3 = document.getElementsByClassName('enemy3');
 	//merge two node lists
-	var allEnemies = mergeNodes( allEnemies1, allEnemies2 );
+	var allEnemies4 = mergeNodes( allEnemies1, allEnemies2 );
+    var allEnemies= mergeNodes( allEnemies3, allEnemies4 );
     var userPosReal = getPlayerPosition();
     for (var i in allEnemies) {
         if (allEnemies[i].nodeName === 'DIV') {
@@ -280,14 +294,14 @@ function moveEnemies(movement) {
             var deltaY = userPos[1] - enemyY;
             var angleInDegrees = Math.atan(deltaY / deltaX);// * 180 / Math.PI;
             if (Math.abs(userPos[0] - (enemyX + Math.cos(angleInDegrees) * movement)) < Math.abs(userPos[0] - (enemyX - Math.cos(angleInDegrees) * movement))) {
-                var newEnemyPosX = (enemyX + Math.cos(angleInDegrees) * movement);
+               newEnemyPosX = (enemyX + Math.cos(angleInDegrees) * movement);
             } else {
-                var newEnemyPosX = (enemyX - Math.cos(angleInDegrees) * movement);
+                newEnemyPosX = (enemyX - Math.cos(angleInDegrees) * movement);
             }
             if (Math.abs(userPos[1] - (enemyY + Math.sin(angleInDegrees) * movement)) < Math.abs(userPos[1] - (enemyY - Math.sin(angleInDegrees) * movement))) {
-                var newEnemyPosY = (enemyY + Math.sin(angleInDegrees) * movement);
+               newEnemyPosY = (enemyY + Math.sin(angleInDegrees) * movement);
             } else {
-                var newEnemyPosY = (enemyY - Math.sin(angleInDegrees) * movement);
+                newEnemyPosY = (enemyY - Math.sin(angleInDegrees) * movement);
             }
             allEnemies[i].style.left = newEnemyPosX + 'px';
             allEnemies[i].style.top = newEnemyPosY + 'px';
@@ -307,15 +321,16 @@ function moveEnemies(movement) {
 
 
 window.onload =function movement(){
-    document.getElementById('nakof').ondragstart = function() { return false; };
-    document.getElementById('arrow').ondragstart = function() { return false; };
+
     document.addEventListener('keydown', keyDown, false);
     document.addEventListener('keyup', keyUp, false);
     document.addEventListener('mousedown', createLasers, false);
     function loop() {
         tick();
+
         setTimeout(loop, tickRate);
-        moveEnemies(2);
+        moveEnemies(1);
+
     }
 
     loop();
