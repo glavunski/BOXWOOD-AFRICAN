@@ -153,6 +153,11 @@ left: 215px;
             z-index: 800;
             left: 515px;
         }
+		#pause{
+		    position: absolute;
+            z-index: 800;
+            left: 605px;
+		}
     </style>
 </head>
 <body class="stop-scrolling">
@@ -161,9 +166,11 @@ left: 215px;
 <div id="healthcon">
     <div id="healthbar"></div>
 </div>
+<button id='pause'>Pause</button>
 <div id="live1"><img id="1" src="nakov.png" width="30" height="30"></div>
 <div id="live2"><img id="2" src="nakov.png" width="30" height="30"></div>
 <div id="live3"><img id="3" src="nakov.png" width="30" height="30"></div>
+
  <div id="gameholder"></div>
 <div id="side2"></div>
 <div id="side4"></div>
@@ -173,8 +180,8 @@ left: 215px;
 
 
 
+
  <script src="eventhandler.js" type="text/javascript"></script>
  <script src="eyes.js" type="text/javascript"></script>
- <script src="rocks.js" type="text/javascript"></script>
 </body>
 </html>
