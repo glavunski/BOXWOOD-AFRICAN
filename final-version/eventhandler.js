@@ -1,5 +1,5 @@
 
-var lives = 1;
+var lives = 3;
 var health=100;
 var score =0;
 var speed=2;
